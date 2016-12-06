@@ -21,6 +21,8 @@ import static org.junit.Assert.assertTrue;
 
 public class MapboxMapOptionsTest {
 
+    private static final double DELTA = 1e-15;
+
     @Test
     public void testSanity() {
         assertNotNull("should not be null", new MapboxMapOptions());
@@ -98,16 +100,16 @@ public class MapboxMapOptionsTest {
 
     @Test
     public void testMinZoom() {
-        assertEquals(MapboxConstants.MINIMUM_ZOOM, new MapboxMapOptions().getMinZoomPreference());
-        assertEquals(5.0f, new MapboxMapOptions().minZoomPreference(5.0f).getMinZoomPreference());
-        assertNotEquals(2.0f, new MapboxMapOptions().minZoomPreference(5.0f).getMinZoomPreference());
+        assertEquals(MapboxConstants.MINIMUM_ZOOM, new MapboxMapOptions().getMinZoomPreference(), DELTA);
+        assertEquals(5.0f, new MapboxMapOptions().minZoomPreference(5.0f).getMinZoomPreference(), DELTA);
+        assertNotEquals(2.0f, new MapboxMapOptions().minZoomPreference(5.0f).getMinZoomPreference(), DELTA);
     }
 
     @Test
     public void testMaxZoom() {
-        assertEquals(MapboxConstants.MAXIMUM_ZOOM, new MapboxMapOptions().getMaxZoomPreference());
-        assertEquals(5.0f, new MapboxMapOptions().maxZoomPreference(5.0f).getMaxZoomPreference());
-        assertNotEquals(2.0f, new MapboxMapOptions().maxZoomPreference(5.0f).getMaxZoomPreference());
+        assertEquals(MapboxConstants.MAXIMUM_ZOOM, new MapboxMapOptions().getMaxZoomPreference(), DELTA);
+        assertEquals(5.0f, new MapboxMapOptions().maxZoomPreference(5.0f).getMaxZoomPreference(), DELTA);
+        assertNotEquals(2.0f, new MapboxMapOptions().maxZoomPreference(5.0f).getMaxZoomPreference(), DELTA);
     }
 
     @Test
