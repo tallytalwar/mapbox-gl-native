@@ -78,7 +78,7 @@ public class MapboxMapTest {
     public void testMinZoom() {
         MapboxMap mapboxMap = activity.getMapboxMap();
         onView(withId(R.id.mapView)).perform(new MinZoomAction(mapboxMap));
-        assertEquals("MinZoom should match", 10, mapboxMap.getMinZoom(), 0);
+        assertEquals("MinZoom should match", 10, mapboxMap.getMinZoomLevel(), 0);
     }
 
     @Test
@@ -86,16 +86,16 @@ public class MapboxMapTest {
     public void testMaxZoom() {
         MapboxMap mapboxMap = activity.getMapboxMap();
         double zoom = 10;
-        mapboxMap.setMaxZoom(zoom);
-        assertEquals("MaxZoom should match", zoom, mapboxMap.getMaxZoom(), 0);
+        mapboxMap.setMaxZoomPreference(zoom);
+        assertEquals("MaxZoom should match", zoom, mapboxMap.getMaxZoomLevel(), 0);
     }
 
     @Test
     @Ignore
     public void testInitialZoomLevels() {
         MapboxMap mapboxMap = activity.getMapboxMap();
-        assertEquals("MaxZoom should match", MapboxConstants.MAXIMUM_ZOOM, mapboxMap.getMaxZoom(), 0);
-        assertEquals("MinZoom should match", MapboxConstants.MINIMUM_ZOOM, mapboxMap.getMinZoom(), 0);
+        assertEquals("MaxZoom should match", MapboxConstants.MAXIMUM_ZOOM, mapboxMap.getMaxZoomLevel(), 0);
+        assertEquals("MinZoom should match", MapboxConstants.MINIMUM_ZOOM, mapboxMap.getMinZoomLevel(), 0);
     }
 
     //
@@ -591,7 +591,7 @@ public class MapboxMapTest {
 
         @Override
         public void perform(UiController uiController, View view) {
-            mapboxMap.setMinZoom(10);
+            mapboxMap.setMinZoomPreference(10);
         }
     }
 
