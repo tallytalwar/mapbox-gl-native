@@ -7,7 +7,6 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.MapboxConstants;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.utils.MockParcel;
 
 import org.junit.Test;
 
@@ -99,16 +98,16 @@ public class MapboxMapOptionsTest {
 
     @Test
     public void testMinZoom() {
-        assertEquals(MapboxConstants.MINIMUM_ZOOM, new MapboxMapOptions().getMinZoom());
-        assertEquals(5.0f, new MapboxMapOptions().minZoom(5.0f).getMinZoom());
-        assertNotEquals(2.0f, new MapboxMapOptions().minZoom(5.0f).getMinZoom());
+        assertEquals(MapboxConstants.MINIMUM_ZOOM, new MapboxMapOptions().getMinZoomPreference());
+        assertEquals(5.0f, new MapboxMapOptions().minZoomPreference(5.0f).getMinZoomPreference());
+        assertNotEquals(2.0f, new MapboxMapOptions().minZoomPreference(5.0f).getMinZoomPreference());
     }
 
     @Test
     public void testMaxZoom() {
-        assertEquals(MapboxConstants.MAXIMUM_ZOOM, new MapboxMapOptions().getMaxZoom());
-        assertEquals(5.0f, new MapboxMapOptions().maxZoom(5.0f).getMaxZoom());
-        assertNotEquals(2.0f, new MapboxMapOptions().maxZoom(5.0f).getMaxZoom());
+        assertEquals(MapboxConstants.MAXIMUM_ZOOM, new MapboxMapOptions().getMaxZoomPreference());
+        assertEquals(5.0f, new MapboxMapOptions().maxZoomPreference(5.0f).getMaxZoomPreference());
+        assertNotEquals(2.0f, new MapboxMapOptions().maxZoomPreference(5.0f).getMaxZoomPreference());
     }
 
     @Test

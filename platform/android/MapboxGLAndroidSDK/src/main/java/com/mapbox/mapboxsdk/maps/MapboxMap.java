@@ -12,13 +12,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.v4.util.Pools;
-
-import timber.log.Timber;
-
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ZoomButtonsController;
 
 import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.R;
@@ -53,6 +49,8 @@ import com.mapbox.services.commons.geojson.Feature;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * The general class to interact with in the Android Mapbox SDK. It exposes the entry point for all
  * methods related to the MapView. You cannot instantiate {@link MapboxMap} object directly, rather,
@@ -76,9 +74,6 @@ public final class MapboxMap {
     private MapboxMap.OnFpsChangedListener onFpsChangedListener;
 
     private boolean myLocationEnabled;
-
-    private double maxZoomLevel = -1;
-    private double minZoomLevel = -1;
 
     MapboxMap(NativeMapView map, Transform transform, UiSettings ui, TrackingSettings tracking, MyLocationViewSettings myLocationView,
               Projection projection, OnRegisterTouchListener listener, AnnotationManager annotations) {
@@ -112,7 +107,7 @@ public final class MapboxMap {
         String accessToken = options.getAccessToken();
         if (!TextUtils.isEmpty(accessToken)) {
             nativeMapView.setAccessToken(accessToken);
-        }else{
+        } else {
             nativeMapView.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
         }
 
@@ -147,8 +142,8 @@ public final class MapboxMap {
         uiSettings.setZoomControlsEnabled(options.getZoomControlsEnabled());
 
         // Zoom
-        setMaxZoom(options.getMaxZoom());
-        setMinZoom(options.getMinZoom());
+        transform.setMaxZoom(options.getMaxZoomPreference());
+        transform.setMinZoom(options.getMinZoomPreference());
 
         Resources resources = context.getResources();
 
@@ -352,14 +347,9 @@ public final class MapboxMap {
      * @param minZoom The new minimum zoom level.
      */
     @UiThread
-    public void setMinZoom(
+    public void setMinZoomPreference(
             @FloatRange(from = MapboxConstants.MINIMUM_ZOOM, to = MapboxConstants.MAXIMUM_ZOOM) double minZoom) {
-        if ((minZoom < MapboxConstants.MINIMUM_ZOOM) || (minZoom > MapboxConstants.MAXIMUM_ZOOM)) {
-            Timber.e("Not setting minZoom, value is in unsupported range: " + minZoom);
-            return;
-        }
-        minZoomLevel = minZoom;
-        nativeMapView.setMinZoom(minZoom);
+        transform.setMinZoom(minZoom);
     }
 
     /**
@@ -370,11 +360,8 @@ public final class MapboxMap {
      * @return The minimum zoom level.
      */
     @UiThread
-    public double getMinZoom() {
-        if (minZoomLevel == -1) {
-            return minZoomLevel = nativeMapView.getMinZoom();
-        }
-        return minZoomLevel;
+    public double getMinZoomLevel() {
+        return transform.getMinZoom();
     }
 
     //
@@ -389,14 +376,8 @@ public final class MapboxMap {
      * @param maxZoom The new maximum zoom level.
      */
     @UiThread
-    public void setMaxZoom(
-            @FloatRange(from = MapboxConstants.MINIMUM_ZOOM, to = MapboxConstants.MAXIMUM_ZOOM) double maxZoom) {
-        if ((maxZoom < MapboxConstants.MINIMUM_ZOOM) || (maxZoom > MapboxConstants.MAXIMUM_ZOOM)) {
-            Timber.e("Not setting maxZoom, value is in unsupported range: " + maxZoom);
-            return;
-        }
-        maxZoomLevel = maxZoom;
-        nativeMapView.setMaxZoom(maxZoom);
+    public void setMaxZoomPreference(@FloatRange(from = MapboxConstants.MINIMUM_ZOOM, to = MapboxConstants.MAXIMUM_ZOOM) double maxZoom) {
+        transform.setMaxZoom(maxZoom);
     }
 
     /**
@@ -407,11 +388,8 @@ public final class MapboxMap {
      * @return The maximum zoom level.
      */
     @UiThread
-    public double getMaxZoom() {
-        if (maxZoomLevel == -1) {
-            return maxZoomLevel = nativeMapView.getMaxZoom();
-        }
-        return maxZoomLevel;
+    public double getMaxZoomLevel() {
+        return transform.getMaxZoom();
     }
 
     //
