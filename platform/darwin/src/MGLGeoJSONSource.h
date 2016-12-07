@@ -59,6 +59,15 @@ extern const MGLGeoJSONSourceOption MGLGeoJSONSourceOptionSimplificationToleranc
 /**
  A GeoJSON source.
 
+ ### Example ###
+ 
+ ```swift
+ var coordinates: [CLLocationCoordinate2D] = []
+ let polyline = MGLPolylineFeature(coordinates: &coordinates, count: UInt(coordinates.count))
+ let source = MGLGeoJSONSource(identifier: "lines", features: [polyline], options: nil)
+ self.mapView.style().add(source)
+ ```
+ 
  @see <a href="https://www.mapbox.com/mapbox-gl-style-spec/#sources-geojson">The
     style specification.</a>
  */

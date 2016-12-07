@@ -10,6 +10,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A raster tile source.
  
+ ### Example ###
+ 
+ ```swift
+ // Define tileset
+ let tileset = MGLTileSet(tileURLTemplates: ["https://example.com/raster-tiles/{z}/{x}/{y}.png"])
+ tileset.minimumZoomLevel = 9
+ tileset.maximumZoomLevel = 16
+ tileset.attribution = "© Mapbox"
+ // Add source to map
+ let source = MGLRasterSource(identifier: "clouds", tileSet: tileset, tileSize: 512)
+ mapView.style().add(source)
+ ```
+ 
  @see <a href="https://www.mapbox.com/mapbox-gl-style-spec/#sources-raster">The
  style specification.</a>
  */

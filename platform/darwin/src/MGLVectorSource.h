@@ -8,6 +8,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A vector tile source. Tiles must be in Mapbox Vector Tile format.
  
+ ### Example ###
+ 
+ ```swift
+ // Define tileset
+ let tileset = MGLTileSet(tileURLTemplates: ["https://example.com/vector-tiles/{z}/{x}/{y}.mvt"])
+ tileset.minimumZoomLevel = 9
+ tileset.maximumZoomLevel = 16
+ tileset.attribution = "© Mapbox"
+ // Add source to map
+ let source = MGLVectorSource(identifier: "pois", tileSet: tileset)
+ mapView.style().add(source)
+ ```
+ 
  @see <a href="https://www.mapbox.com/mapbox-gl-style-spec/#sources-vector">The
     style specification.</a>
  */
