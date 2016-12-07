@@ -5,8 +5,9 @@
  details like color or width. Use subclasses of `MGLStyleLayer` to give visual
  representation to sources.
  
- You should use the concrete subclasses of `MGLSource` to create vector, 
- raster, GeoJSON, and other source types.
+ You should use the concrete subclasses of `MGLSource` (`MGLVectorSource`, 
+ `MGLRasterSource`, `MGLGeoJSONSource`) to create vector, raster, GeoJSON, 
+ and other source types.
  */
 @interface MGLSource : NSObject
 
