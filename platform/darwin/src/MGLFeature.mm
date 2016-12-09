@@ -36,9 +36,9 @@
     self = [super initWithCoder:decoder];
     if (self)
     {
-        NSSet<Class> *identifierClasses = [NSSet setWithArray:@[NSString.class, NSNumber.class]];
+        NSSet<Class> *identifierClasses = [NSSet setWithArray:@[[NSString class], [NSNumber class]]];
         identifier = [decoder decodeObjectOfClasses:identifierClasses forKey:@"identifier"];
-        attributes = [decoder decodeObjectOfClass:NSDictionary.class forKey:@"attributes"];
+        attributes = [decoder decodeObjectOfClass:[NSDictionary class] forKey:@"attributes"];
     }
     return self;
 }
@@ -61,7 +61,7 @@
 
 - (NSUInteger)hash
 {
-    return [super hash]+[[self geoJSONDictionary] hash];
+    return [super hash] + [[self geoJSONDictionary] hash];
 }
 
 - (id)attributeForKey:(NSString *)key {
