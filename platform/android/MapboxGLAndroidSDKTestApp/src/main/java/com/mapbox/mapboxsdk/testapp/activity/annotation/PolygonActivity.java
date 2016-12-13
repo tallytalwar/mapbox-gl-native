@@ -188,9 +188,11 @@ public class PolygonActivity extends AppCompatActivity implements OnMapReadyCall
                 hole3.add(new LatLng(lat, lon - 0.005));
                 hole3.add(new LatLng(lat, lon));
                 
-                polygon.addHole(hole1)
-                        .addHole(hole2)
-                        .addHole(hole3);
+                List<List<LatLng>> holes = new ArrayList<>();
+                holes.add(hole1);
+                holes.add(hole2);
+                holes.add(hole3);
+                polygon.setHoles(holes);
                 
                 return true;
 
