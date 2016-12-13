@@ -5,11 +5,6 @@
 
 #import <mbgl/util/geo.hpp>
 
-bool compareByCoordinate(CLLocationCoordinate2D lhs, CLLocationCoordinate2D rhs)
-{
-    return lhs.latitude+lhs.longitude < rhs.latitude+rhs.longitude;
-}
-
 bool operator!=(const CLLocationCoordinate2D lhs, const CLLocationCoordinate2D rhs) {
     return lhs.latitude != rhs.latitude || lhs.longitude != rhs.longitude;
 }
@@ -17,9 +12,6 @@ bool operator!=(const CLLocationCoordinate2D lhs, const CLLocationCoordinate2D r
 bool operator==(std::vector<CLLocationCoordinate2D>& lhs, std::vector<CLLocationCoordinate2D>& rhs)
 {
     if (lhs.size() != rhs.size()) return false;
-    
-    std::sort(lhs.begin(), lhs.end(), compareByCoordinate);
-    std::sort(rhs.begin(), rhs.end(), compareByCoordinate);
     
     auto itLhs = lhs.begin();
     auto itRhs = rhs.begin();
