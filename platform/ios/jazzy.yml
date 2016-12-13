@@ -59,7 +59,7 @@ custom_categories:
       - MGLPolylineFeature
       - MGLMultiPolygonFeature
       - MGLMultiPolylineFeature
-      - MGLPointCollectionFeature      
+      - MGLPointCollectionFeature
       - MGLShapeCollectionFeature
   - name: Style Sources
     children:
