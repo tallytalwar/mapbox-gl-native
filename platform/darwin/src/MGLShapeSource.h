@@ -70,10 +70,14 @@ extern const MGLShapeSourceOption MGLShapeSourceOptionSimplificationTolerance;
  ### Example ###
  
  ```swift
- var coordinates: [CLLocationCoordinate2D] = []
+ var coordinates: [CLLocationCoordinate2D] = [
+    CLLocationCoordinate2D(latitude: 37.77, longitude: -122.42),
+    CLLocationCoordinate2D(latitude: 38.91, longitude: -77.04),
+ ]
  let polyline = MGLPolylineFeature(coordinates: &coordinates, count: UInt(coordinates.count))
- let source = MGLGeoJSONSource(identifier: "lines", features: [polyline], options: nil)
- self.mapView.style().add(source)
+ let shape = MGLShapeCollectionFeature(shapes: [polyline])
+ let source = MGLShapeSource(identifier: "lines", shape: shape, options: nil)
+ mapView.style.addSource(source)
  ```
  
  @see <a href="https://www.mapbox.com/mapbox-gl-style-spec/#sources-geojson">The
