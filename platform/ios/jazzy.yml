@@ -65,7 +65,7 @@ custom_categories:
     children:
       - MGLSource
       - MGLTileSet
-      - MGLGeoJSONSource
+      - MGLShapeSource
       - MGLRasterSource
       - MGLVectorSource
   - name: Style Layers (Abstract)
